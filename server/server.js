@@ -15,15 +15,19 @@ app.use('/api/auth', require('./routes/auth'))
 app.use('/api/expenses', require('./routes/expenses'))
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/client/build')))
+  app.use(express.static(path.join(__dirname, '../', '/client/build')))
   app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    res.sendFile(
+      path.resolve(__dirname, '../', 'client', 'build', 'index.html')
+    )
   )
 } else {
   app.get('/', (req, res) => {
     res.json({ msg: 'Welcome to expense tracker API' })
   })
 }
+
+// console.log(path.resolve(__dirname, '../', 'client', 'build', 'index.html'))
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
