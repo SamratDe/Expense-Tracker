@@ -14,8 +14,6 @@ app.use('/api/users', require('./routes/users'))
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/expenses', require('./routes/expenses'))
 
-const __dirname = path.resolve()
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')))
   app.get('*', (req, res) =>
