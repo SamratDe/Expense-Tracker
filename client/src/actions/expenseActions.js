@@ -180,6 +180,18 @@ export const reportExpenses = (month) => async (dispatch, getState) => {
     }
     finalRes.push([dollar, euro, rupee])
 
+    dollar = Number(0)
+    euro = Number(0)
+    rupee = Number(0)
+    for (let i = 0; i < res.length; i++) {
+      if (res[i].week === Number(6)) {
+        if (res[i].currency === 'Dollar') dollar = dollar + res[i].amount
+        if (res[i].currency === 'Euro') euro = euro + res[i].amount
+        if (res[i].currency === 'Rupee') rupee = rupee + res[i].amount
+      }
+    }
+    finalRes.push([dollar, euro, rupee])
+
     dispatch({ type: EXPENSE_REPORT_SUCCESS, payload: finalRes })
   } catch (err) {
     dispatch({
